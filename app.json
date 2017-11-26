@@ -1,12 +1,11 @@
 {
   "expo": {
    "name": "Bodytec",
-   "icon": "./icon.png",
+   "icon": "./assets/icon.png",
    "version": "1.0.0",
    "slug": "bodytec",
    "sdkVersion": "22.0.0",
    "splash": {
-    "backgroundColor": "#FFFFFF",
     "image": "./assets/splash-mdpi.png",
     "resizeMode": "cover"
   },
