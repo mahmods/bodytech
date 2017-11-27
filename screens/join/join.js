@@ -1,16 +1,29 @@
 import React from 'react';
-import { Text,ScrollView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
+import { Text,ScrollView,KeyboardAvoidingView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import Swiper from 'react-native-swiper';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { Ionicons, Foundation } from '@expo/vector-icons';
 
 export default class join extends React.Component {
-static navigationOptions = {
-    drawerLabel: 'انضم إلينا'
-    };
+    static navigationOptions = ({ navigation }) => ({
+        title: 'انضم إلينا',
+        headerStyle: {position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
+        headerTintColor: 'rgba(0,0,0,0)',
+        headerLeft: (
+          <Ionicons name="md-arrow-round-back" style={{padding: 20}} size={28} color="#fff"
+          onPress={()=>{ navigation.goBack(null) }} />
+        ),
+        headerRight: (
+        <Foundation name="list" style={{padding: 20}} size={28} color="#fff"
+        onPress={()=>{ navigation.navigate('DrawerOpen') }} />
+        )
+      });
     render() {
         return (
             <Image source={require('../../assets/back2-mdpi.png')} style={styles.backGround}>
                 <Text style={styles.title}>انضم الينا الان</Text>
-            <ScrollView contentContainerStyle={styles.contentContainer}>
+            <KeyboardAwareScrollView contentContainerStyle={styles.keyview}>
                 <Text style={styles.label}>الاسم بالكامل</Text>                    
                 <TextInput placeholder='اسم العضو' style={styles.input} />
                 <Text style={styles.label}>البريد الالكتروني</Text>                    
@@ -20,14 +33,11 @@ static navigationOptions = {
                 <Text style={styles.label}>التفاصيل</Text>                    
                 <TextInput 
                 placeholder='التفاصيل' 
-                multiline = {true} 
-                maxLength={40}
-                numberOfLines = {4} 
                 style={styles.input} />
                 <TouchableHighlight style={styles.btn1}>
                     <Text style={styles.btnText}>انضم الينا</Text>
                 </TouchableHighlight>
-            </ScrollView>
+            </KeyboardAwareScrollView>
             </Image>
         )
     }
@@ -39,44 +49,50 @@ const styles = StyleSheet.create({
     title: {
         color: '#fff',
         fontFamily: 'NeoSansArabic',
-        marginTop: 30,
-        padding: 30
+        marginTop: 20,
+        textAlign: 'center',
+        padding: 10,
+        fontSize: 20,
+        backgroundColor: 'rgba(0,0,0,0)'
     },
-    contentContainer: {
-        paddingVertical: 20
-      },
+    keyview: {
+        flex: 1,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 20,
+        marginRight: 30,
+        marginLeft: 30
+    },
     label: {
         color: '#fff',
         fontFamily: 'NeoSansArabic',
         alignSelf: 'flex-end',
-        marginBottom: 5
+        marginBottom: 5,
+        backgroundColor: 'rgba(0,0,0,0)'
     },
     input: {
+        alignSelf: 'stretch',
         backgroundColor: '#fff',
         fontFamily: 'NeoSansArabic',
-        width: Dimensions.get('window').width - 40,
-        height: 40,
-        marginBottom: 20
+        padding: 10,
+        marginBottom: 15,
     },
     backGround: {
         flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-      width: null,
-      height: null,
+        width: null,
+        height: null,
     },
     scrollView: {
         
     },
     btn1: {
+        alignSelf: 'stretch',
         backgroundColor: '#0584f7',
         paddingRight:40,
         paddingLeft:40,
         paddingTop: 5,
         paddingBottom: 5,
         borderRadius:100,
-        alignSelf: "flex-end",
-        width: Dimensions.get('window').width - 40,
       },
       btnText: {
         fontFamily: 'NeoSansArabic',

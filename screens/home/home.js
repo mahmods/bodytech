@@ -2,12 +2,19 @@ import React from 'react';
 import { Text, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styles from './styles'
+import { Foundation } from '@expo/vector-icons';
+
 
 export default class Home extends React.Component {
-    static navigationOptions = {
-        drawerLabel: 'الرئيسية',
-        
-      };
+    static navigationOptions = ({ navigation }) => ({
+        title: 'الرئيسية',
+        headerStyle: {position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
+        headerTintColor: 'rgba(0,0,0,0)',
+        headerRight: (
+          <Foundation name="list" style={{padding: 20}} size={28} color="#fff"
+          onPress={()=>{ navigation.navigate('DrawerOpen') }} />
+        )
+      });
     render() {
       return (
               <Swiper 

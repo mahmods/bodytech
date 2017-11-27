@@ -2,41 +2,52 @@ import React from 'react';
 import { AppLoading, Asset, Font } from 'expo';
 import Home from './screens/home/home'
 import Join from './screens/join/join'
+import Gallery from './screens/gallery/gallery'
 
 import { StyleSheet, Text, View, Image, StatusBar, ImageBackground, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
 import CustomDrawer from './CustomDrawer'
 
 const Stack = {
-  Home: { screen: Home },
-  Join: { screen: Join },
+	Home: {
+		screen: Home
+	},
+	Join: {
+		screen: Join
+  },
+  Gallery: {
+		screen: Gallery
+	},
 };
-
 
 const DrawerRoutes = {
-  Home: {
-    name: 'Home',
-    screen: StackNavigator(Stack, { initialRouteName: 'Home' }),
-    header: { visible:false }
+	HomeStack: {
+		screen: StackNavigator(Stack, { initialRouteName: 'Home' })
+	},
+  galleryStack: {
+    screen: StackNavigator(Stack, { initialRouteName: 'Gallery' })
   },
-  Join: {
-    name: 'Join',
-    screen: StackNavigator(Stack, { initialRouteName: 'Join' }),
-  }
+	joinStack: {
+		screen: StackNavigator(Stack, { initialRouteName: 'Join' })
+  },
 };
 
-const RootNavigator =
-StackNavigator({
-  Drawer: {
-    name: 'Drawer',
-    screen: DrawerNavigator(DrawerRoutes),
-  },
-  ...Stack
-},
-  {
-    headerMode: 'none',
-  }
-);
+const RootNavigator = StackNavigator({
+		Drawer: {
+			name: 'Drawer',
+			screen: DrawerNavigator(
+				DrawerRoutes,{
+          contentComponent: CustomDrawer,
+          drawerPosition: 'right'
+        }
+			),
+		},
+		...Stack
+	},
+		{
+			headerMode: 'none'
+		}
+	);
 
 function cacheImages(images) {
   return images.map(image => {
