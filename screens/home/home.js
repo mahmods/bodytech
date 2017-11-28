@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
+import { Text, View, Image, StatusBar, TouchableHighlight,TouchableOpacity, Dimensions, Platform, PixelRatio } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styles from './styles'
 import { Foundation } from '@expo/vector-icons';
@@ -8,11 +8,13 @@ import { Foundation } from '@expo/vector-icons';
 export default class Home extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'الرئيسية',
-        headerStyle: {position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
+        //headerStyle: {marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, backgroundColor: 'transparent',},//,position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
+        headerStyle:{ marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
         headerTintColor: 'rgba(0,0,0,0)',
+        //headerTitleStyle: {fontFamily: 'NeoSansArabic',  fontWeight: 'normal',},
         headerRight: (
-          <Foundation name="list" style={{padding: 20}} size={28} color="#fff"
-          onPress={()=>{ navigation.navigate('DrawerOpen') }} />
+          <TouchableOpacity><Foundation name="list" style={{padding: 20}} size={28} color="#fff"
+          onPress={()=>{ navigation.navigate('DrawerOpen') }} /></TouchableOpacity>
         )
       });
     render() {
@@ -66,10 +68,10 @@ export default class Home extends React.Component {
             <TouchableHighlight style={styles.btn1} onPress={() => this.props.navigation.navigate('Join')}>
                 <Text style={styles.btnText}>انضم الينا الان</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.btn2}>
+            <TouchableHighlight style={styles.btn2} onPress={() => this.props.navigation.navigate('Gallery')}>
                 <Text style={[styles.btnText, {padding: 19}]}>تعرف على مركز بودي تيك</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.btn3}>
+            <TouchableHighlight style={styles.btn3} onPress={() => this.props.navigation.navigate('Contact')}>
                 <Text style={[styles.btnText, {padding: 20, fontSize: 18}]}>تواصل معنا</Text>
             </TouchableHighlight>
           </Image>

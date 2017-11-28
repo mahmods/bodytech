@@ -5,11 +5,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import { Ionicons, Foundation } from '@expo/vector-icons';
 
+import { Header } from 'react-navigation';
 export default class join extends React.Component {
     static navigationOptions = ({ navigation }) => ({
         title: 'انضم إلينا',
-        headerStyle: {position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
-        headerTintColor: 'rgba(0,0,0,0)',
+        headerStyle:{ marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
+        headerTintColor: '#fff',
+        headerTitleStyle: {fontFamily: 'NeoSansArabic',  fontWeight: 'normal', alignSelf:'center'},
         headerLeft: (
           <Ionicons name="md-arrow-round-back" style={{padding: 20}} size={28} color="#fff"
           onPress={()=>{ navigation.goBack(null) }} />
@@ -22,8 +24,9 @@ export default class join extends React.Component {
     render() {
         return (
             <Image source={require('../../assets/back2-mdpi.png')} style={styles.backGround}>
-                <Text style={styles.title}>انضم الينا الان</Text>
-            <KeyboardAwareScrollView contentContainerStyle={styles.keyview}>
+                {/* <Text style={styles.title}>انضم الينا الان</Text> */}
+            <KeyboardAvoidingView behavior='padding' style={styles.keyview}>
+            <ScrollView style={{flex:1}}>
                 <Text style={styles.label}>الاسم بالكامل</Text>                    
                 <TextInput placeholder='اسم العضو' style={styles.input} />
                 <Text style={styles.label}>البريد الالكتروني</Text>                    
@@ -37,7 +40,8 @@ export default class join extends React.Component {
                 <TouchableHighlight style={styles.btn1}>
                     <Text style={styles.btnText}>انضم الينا</Text>
                 </TouchableHighlight>
-            </KeyboardAwareScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
             </Image>
         )
     }
@@ -57,9 +61,9 @@ const styles = StyleSheet.create({
     },
     keyview: {
         flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        paddingVertical: 20,
+        //justifyContent: 'space-around',
+        //alignItems: 'center',
+        //paddingVertical: 20,
         marginRight: 30,
         marginLeft: 30
     },
@@ -81,6 +85,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null,
+        marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight,
+        paddingTop: (Platform.OS === 'ios') ? 0 : Header.HEIGHT,
     },
     scrollView: {
         

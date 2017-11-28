@@ -3,6 +3,7 @@ import { AppLoading, Asset, Font } from 'expo';
 import Home from './screens/home/home'
 import Join from './screens/join/join'
 import Gallery from './screens/gallery/gallery'
+import Contact from './screens/contact/contact'
 
 import { StyleSheet, Text, View, Image, StatusBar, ImageBackground, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
@@ -17,12 +18,15 @@ const Stack = {
   },
   Gallery: {
 		screen: Gallery
+  },
+  Contact: {
+		screen: Contact
 	},
 };
 
 const DrawerRoutes = {
 	HomeStack: {
-		screen: StackNavigator(Stack, { initialRouteName: 'Home' })
+		screen: StackNavigator(Stack, { initialRouteName: 'Home', })
 	},
   galleryStack: {
     screen: StackNavigator(Stack, { initialRouteName: 'Gallery' })
@@ -30,13 +34,15 @@ const DrawerRoutes = {
 	joinStack: {
 		screen: StackNavigator(Stack, { initialRouteName: 'Join' })
   },
+  contactStack: {
+		screen: StackNavigator(Stack, { initialRouteName: 'Contact' })
+  },
 };
 
 const RootNavigator = StackNavigator({
 		Drawer: {
 			name: 'Drawer',
-			screen: DrawerNavigator(
-				DrawerRoutes,{
+			screen: DrawerNavigator(DrawerRoutes,{
           contentComponent: CustomDrawer,
           drawerPosition: 'right'
         }
@@ -45,7 +51,8 @@ const RootNavigator = StackNavigator({
 		...Stack
 	},
 		{
-			headerMode: 'none'
+      headerMode: 'none',
+      
 		}
 	);
 
