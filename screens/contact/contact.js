@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: null,
         height: null,
-        marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight,
-        paddingTop: (Platform.OS === 'ios') ? 0 : Header.HEIGHT,
+        marginTop: Expo.Constants.statusBarHeight,
+        paddingTop: Header.HEIGHT,
     },
     scrollView: {
         

@@ -4,15 +4,16 @@ export default styles = StyleSheet.create({
     wrapper: {
       
     },
-    trapezoid: {
-      width: 300,
-      height: 0,
-      borderBottomWidth: 200,
-      borderBottomColor: '#0584f7',
-      borderLeftWidth: 10,
-      borderLeftColor: 'transparent',
-      borderStyle: 'solid',
-      alignSelf: "flex-end",
+    pathText: {
+      color: 'white',
+      fontSize: 8,
+      fontFamily: 'NeoSansArabic',
+      textAlign: 'right',
+      marginRight: 10
+    },
+    pathInnerWrapper: {
+      flexDirection:'row',
+      alignItems: 'center',
     },
     btnText: {
       fontFamily: 'NeoSansArabic',
@@ -26,7 +27,7 @@ export default styles = StyleSheet.create({
     slide1: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'center',
+      alignItems: 'flex-end',
       width: null,
       height: null,
     },

@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, View, Image, StatusBar, TouchableHighlight,TouchableOpacity, Dimensions, Platform, PixelRatio } from 'react-native';
 import Swiper from 'react-native-swiper';
 import styles from './styles'
-import { Foundation } from '@expo/vector-icons';
+import { Foundation, Ionicons } from '@expo/vector-icons';
+
+import Svg,{Path} from 'react-native-svg';
 
 
 export default class Home extends React.Component {
@@ -26,14 +28,75 @@ export default class Home extends React.Component {
                 loop={false}
                 index={4}>
           <Image source={require('../../assets/back-mdpi.png')} style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
+          <View style={styles.textBack}>
+            <Text style={[styles.text, {lineHeight: 0,fontSize: 15, paddingBottom: 0}]}>عنوان السلايدر</Text>
+          </View>
+          <View style={styles.textBack}>
+              <Text style={[styles.text, {lineHeight: 0, textAlign: 'right'}]}>
+              هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+              </Text>
+            </View>
+            <Svg style={{alignItems: 'flex-end'}} width={Dimensions.get('window').width * 0.95} height={45}>
+            <Path 
+            d="M0.000,0.189 L348.000,0.189 L318.000,41.167 L0.000,41.167 L0.000,0.189 Z"
+            fill="#0584f7"/>
+            <View style={{marginTop: 10, marginRight: 10}}>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            </View>
+            </Svg>
           </Image>
           <Image source={require('../../assets/back2-mdpi.png')} style={styles.slide1}>
-            <View style={styles.trapezoid}>
-            <Text>تواصل معنا</Text>
-            <Text>تواصل معنا</Text>
-            <Text>تواصل معنا</Text>
-            <Text>تواصل معنا</Text>
+          <View style={styles.textBack}>
+            <Text style={[styles.text, {lineHeight: 0,fontSize: 15, paddingBottom: 0}]}>عنوان السلايدر</Text>
+          </View>
+          <View style={styles.textBack}>
+              <Text style={[styles.text, {lineHeight: 0, textAlign: 'right'}]}>
+              هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+              </Text>
+            </View>
+            <Svg style={{alignItems: 'flex-end'}} width={Dimensions.get('window').width * 0.95} height={167}>
+            <Path 
+            d="M0.333,0.492 L335.333,0.492 L335.333,166.403 L49.000,166.403 L0.333,0.492 Z"
+            fill="#0584f7"/>
+            <View style={{marginTop: 10, marginRight: 10}}>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            <View style={styles.pathInnerWrapper}>
+              <Text style={styles.pathText}>هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة</Text>
+              <Ionicons name="ios-checkmark-circle-outline" size={20} color="#fff"/>
+            </View>
+            </View>
+             </Svg>
+             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+  
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Join')} style={styles.btn4}>
+                <Text style={styles.btnText}>انضم الينا الان</Text>
+            </TouchableHighlight>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Contact')} style={[styles.btn4, {backgroundColor: '#ea3c3c'}]}>
+                <Text style={styles.btnText}>تواصل معنا</Text>
+            </TouchableHighlight>
+  
             </View>
           </Image>
           <Image source={require('../../assets/back2-mdpi.png')} style={styles.slide2}>
@@ -45,11 +108,11 @@ export default class Home extends React.Component {
             </View>
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
   
-            <TouchableHighlight style={[styles.btn4, {backgroundColor: '#ea3c3c'}]}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Contact')} style={[styles.btn4, {backgroundColor: '#ea3c3c'}]}>
                 <Text style={styles.btnText}>تواصل معنا</Text>
             </TouchableHighlight>
   
-            <TouchableHighlight style={styles.btn4}>
+            <TouchableHighlight onPress={() => this.props.navigation.navigate('Join')} style={styles.btn4}>
                 <Text style={styles.btnText}>انضم الينا الان</Text>
             </TouchableHighlight>
             </View>

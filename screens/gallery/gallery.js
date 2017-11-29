@@ -39,6 +39,7 @@ export default class join extends React.Component {
         return fetch('http://bodytec-iraq.com/api/get-galleries')
         .then((response) => response.json())
         .then((responseJson) => {
+          console.log(responseJson)
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
             console.log(responseJson.galleries[0].image_url.ful_url)
             this.setState({
@@ -113,8 +114,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         //paddingHorizontal: BASE_PADDING,
-        marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight,
-        paddingTop: (Platform.OS === 'ios') ? 0 : Header.HEIGHT,
+        marginTop: Expo.Constants.statusBarHeight,
+        paddingTop: Header.HEIGHT,
       },
     image: {
       flex: 1,
