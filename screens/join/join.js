@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text,ScrollView,KeyboardAvoidingView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
+import { Alert, Text,ScrollView,KeyboardAvoidingView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio, TouchableOpacity } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
@@ -7,6 +7,17 @@ import { Ionicons, Foundation } from '@expo/vector-icons';
 
 import { Header } from 'react-navigation';
 export default class join extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isLoading: true,
+          name: '',
+          email: '',
+          phone: '',
+          location: '',
+          details: ''
+        }
+      }
     static navigationOptions = ({ navigation }) => ({
         title: 'انضم إلينا',
         headerStyle:{ marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
@@ -25,21 +36,44 @@ export default class join extends React.Component {
         return (
             <Image source={require('../../assets/back2-mdpi.png')} style={styles.backGround}>
                 {/* <Text style={styles.title}>انضم الينا الان</Text> */}
-            <KeyboardAvoidingView behavior='padding' style={styles.keyview}>
+            <KeyboardAvoidingView behavior='height' style={styles.keyview}>
             <ScrollView style={{flex:1}}>
                 <Text style={styles.label}>الاسم بالكامل</Text>                    
-                <TextInput placeholder='اسم العضو' style={styles.input} />
+                <TextInput onChangeText={(text) => this.setState({name: text})} placeholder='اسم العضو' style={styles.input} />
                 <Text style={styles.label}>البريد الالكتروني</Text>                    
-                <TextInput placeholder='البريد الالكتروني' style={styles.input} />
-                <Text style={styles.label}>رقم الهاتف</Text>                    
-                <TextInput placeholder='رقم الهاتف' style={styles.input} />
+                <TextInput onChangeText={(text) => this.setState({email: text})} placeholder='البريد الالكتروني' style={styles.input} />
+                <Text style={styles.label}>رقم التليفون</Text>                    
+                <TextInput onChangeText={(text) => this.setState({phone: text})} placeholder='رقم التليفون' style={styles.input} />
+                <Text style={styles.label}>موقعك</Text>                    
+                <TextInput onChangeText={(text) => this.setState({location: text})} placeholder='موقعك' style={styles.input} />
                 <Text style={styles.label}>التفاصيل</Text>                    
                 <TextInput 
-                placeholder='التفاصيل' 
+                onChangeText={(text) => this.setState({details: text})}
+                placeholder='تفاصيل أخرى' 
                 style={styles.input} />
-                <TouchableHighlight style={styles.btn1}>
+                <TouchableOpacity style={styles.btn1} onPress={()=>{
+                    fetch('http://bodytec-iraq.com/api/join-us-service', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            name: this.state.name,
+                            email: this.state.email,
+                            phone: this.state.phone,
+                            location: this.state.location,
+                            details: this.state.details,
+                        })
+                      })
+                      .then((response) => response.json())
+                      .then((responseJson) => {
+                        if(responseJson.status_code == 200) {
+                            Alert.alert('success','success')
+                        }
+                      })
+                      .catch(error => {
+                        Alert.alert('error',error)
+                      })
+                }}>
                     <Text style={styles.btnText}>انضم الينا</Text>
-                </TouchableHighlight>
+                </TouchableOpacity>
                 </ScrollView>
             </KeyboardAvoidingView>
             </Image>
@@ -80,6 +114,7 @@ const styles = StyleSheet.create({
         fontFamily: 'NeoSansArabic',
         padding: 10,
         marginBottom: 15,
+        borderRadius: 5
     },
     backGround: {
         flex: 1,

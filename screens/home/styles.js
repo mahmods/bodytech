@@ -1,25 +1,36 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get('window');
+
+//Guideline sizes are based on standard ~5" screen mobile device
+const guidelineBaseWidth = 350;
+const guidelineBaseHeight = 680;
+
+const scale = size => width / guidelineBaseWidth * size;
+const verticalScale = size => height / guidelineBaseHeight * size;
+const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
 
 export default styles = StyleSheet.create({
     wrapper: {
       
     },
     pathText: {
-      color: 'white',
-      fontSize: 8,
+      color: '#fff',
+      fontSize: scale(10),
       fontFamily: 'NeoSansArabic',
-      textAlign: 'right',
-      marginRight: 10
+      marginRight: 5
     },
     pathInnerWrapper: {
+      justifyContent: 'flex-end',
       flexDirection:'row',
-      alignItems: 'center',
+      marginBottom: 10,
     },
     btnText: {
       fontFamily: 'NeoSansArabic',
       color: 'white',
       textAlign: 'center',
       padding: 8,
+      fontSize: scale(10)
     },
     textBack: {
       backgroundColor: 'rgba(0,0,0,0)'
@@ -27,14 +38,15 @@ export default styles = StyleSheet.create({
     slide1: {
       flex: 1,
       justifyContent: 'center',
-      alignItems: 'flex-end',
+      alignItems: 'center',
       width: null,
       height: null,
     },
     slide2: {
       flex: 1,
-      justifyContent: 'space-around',
+      justifyContent: 'flex-end',
       alignItems: 'center',
+      paddingBottom: 50,
       width: null,
       height: null,
     },
@@ -44,19 +56,26 @@ export default styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor: '#92BBD9',
     },
+    slide4: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+      paddingBottom: 50,
+      width: null,
+      height: null,
+    },
     text: {
       color: '#fff',
       fontFamily: 'NeoSansArabic',
       textAlign: 'center',
       padding: 15,
-      fontSize: 14,
-      lineHeight: 30
+      fontSize: scale(14),
+      lineHeight: scale(30)
     },
     logo: {
       alignSelf: "flex-end",
       marginRight: 20,
       width: 250,
-      height: 43,
     },
     btn1: {
       backgroundColor: '#0584f7',
@@ -92,10 +111,8 @@ export default styles = StyleSheet.create({
       backgroundColor: '#0584f7',
       borderRadius: 100,
       overflow: 'hidden',
-      paddingTop:5,
-      paddingBottom:5,
-      paddingRight:25,
-      paddingLeft:25,
-      margin: 10
+      paddingRight:scale(35),
+      paddingLeft:scale(35),
+      margin: 10,
     }
   })

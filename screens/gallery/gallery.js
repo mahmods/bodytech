@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#212121',
         justifyContent: 'center',
         alignItems: 'center',
-        //paddingHorizontal: BASE_PADDING,
+        paddingHorizontal: BASE_PADDING,
         marginTop: Expo.Constants.statusBarHeight,
         paddingTop: Header.HEIGHT,
       },

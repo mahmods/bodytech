@@ -4,6 +4,7 @@ import Home from './screens/home/home'
 import Join from './screens/join/join'
 import Gallery from './screens/gallery/gallery'
 import Contact from './screens/contact/contact'
+import About from './screens/about/about'
 
 import { StyleSheet, Text, View, Image, StatusBar, ImageBackground, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
@@ -21,6 +22,9 @@ const Stack = {
   },
   Contact: {
 		screen: Contact
+  },
+  About: {
+		screen: About
 	},
 };
 
@@ -36,6 +40,9 @@ const DrawerRoutes = {
   },
   contactStack: {
 		screen: StackNavigator(Stack, { initialRouteName: 'Contact' })
+  },
+  aboutStack: {
+		screen: StackNavigator(Stack, { initialRouteName: 'About' })
   },
 };
 
@@ -77,7 +84,7 @@ export default class App extends React.Component {
 
   async _loadAssetsAsync() {
     const imageAssets = cacheImages([
-      require('./assets/main-bg-mdpi.png'),
+      require('./assets/main-bg.png'),
       require('./assets/logo.png'),
       require('./assets/back2-mdpi.png'),
       require('./assets/back-mdpi.png')

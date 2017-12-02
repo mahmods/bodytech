@@ -7,7 +7,7 @@
    "sdkVersion": "22.0.0",
    "orientation": "portrait",
    "splash": {
-    "image": "./assets/splash-mdpi.png",
+    "image": "./assets/splash.png",
     "resizeMode": "cover"
   },
    "ios": {
