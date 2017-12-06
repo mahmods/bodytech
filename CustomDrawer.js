@@ -5,9 +5,13 @@ import { style } from 'expo/src/Font';
 
 export default CustomDrawer = (props) => (
   <ScrollView style={styles.scrollView}>
-  <View style={styles.logoWrapper}><Image source={require('./assets/logo.png')} style={styles.logo}/></View>
+  <View style={styles.logoWrapper}>
+    <Image source={require('./assets/logo.png')} style={styles.logo}/>
+  </View>
     <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
-      <DrawerItems {...props} labelStyle={styles.label} 
+      <DrawerItems {...props} 
+      labelStyle = {styles.label}
+      itemStyle = {{justifyContent: 'flex-end'}}
       activeTintColor='#ffffff'
       inactiveTintColor='#525252'
       activeBackgroundColor='#0584f7'  />

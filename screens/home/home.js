@@ -22,7 +22,7 @@ export default class Home extends React.Component {
         headerTintColor: 'rgba(0,0,0,0)',
         //headerTitleStyle: {fontFamily: 'NeoSansArabic',  fontWeight: 'normal',},
         headerRight: (
-          <TouchableOpacity><Foundation name="list" style={{padding: 20}} size={28} color="#fff"
+          <TouchableOpacity><Foundation name="list" style={{padding: 20, width:50}} size={28} color="#fff"
           onPress={()=>{ navigation.navigate('DrawerOpen') }} /></TouchableOpacity>
         )
       });
@@ -30,7 +30,8 @@ export default class Home extends React.Component {
       return (
             <Image source={require('../../assets/main-bg.png')} style={[styles.slide1]}>
             <Image source={require('../../assets/logo.png')} style={[styles.logo, {width: scale(250)}]} resizeMode="contain"/>
-            <Text style={{alignSelf: "flex-end", fontFamily: 'NeoSansArabic', fontSize: scale(22), marginRight: 20,}}>
+            <View style={{ alignSelf: "flex-end", marginRight: 20, backgroundColor: 'rgba(0,0,0,0)', alignItems: 'flex-end', justifyContent: 'flex-end', padding: 0, margin: 0}}>
+            <Text style={{ fontFamily: 'NeoSansArabic', fontSize: scale(22)}}>
               <Text style={{color: "#1e94ff"}}>أبني </Text>
               <Text style={{color: "#ef171b"}}>جسمك </Text>
               <Text style={{color: "#1e94ff"}}>ليكون </Text>
@@ -39,10 +40,11 @@ export default class Home extends React.Component {
             <Text style={{color: "#ffffff", alignSelf: "flex-end", fontFamily: 'NeoSansArabic', fontSize: scale(14), marginRight: 20,}}>
             هل أنت مستعد للتجربة
             </Text>
+            </View>
             <TouchableHighlight style={styles.btn1} onPress={() => this.props.navigation.navigate('Join')}>
                 <Text style={[styles.btnText, {fontSize: scale(14)}]}>انضم الينا الان</Text>
             </TouchableHighlight>
-            <TouchableHighlight style={styles.btn2} onPress={() => this.props.navigation.navigate('Gallery')}>
+            <TouchableHighlight style={styles.btn2} onPress={() => this.props.navigation.navigate('About')}>
                 <Text style={[styles.btnText, {padding: 19, fontSize: scale(14)}]}>تعرف على مركز بودي تيك</Text>
             </TouchableHighlight>
             <TouchableHighlight style={styles.btn3} onPress={() => this.props.navigation.navigate('Contact')}>

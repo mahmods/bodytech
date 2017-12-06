@@ -76,40 +76,22 @@ export default class about extends React.Component {
           }
         return (
             <View style={styles.backGround}>
-            
           <Image source={require('../../assets/back2-mdpi.png')} style={styles.slide4}>
-            <View style={[styles.textBack, {paddingRight: 5, paddingLeft: 5}]}>
-              <Text style={[styles.text, {alignSelf:'flex-end', textAlign: 'right', fontSize: scale(22), paddingBottom: 0}]}>من نحن</Text>
+            <View style={[styles.textBack, {paddingRight: scale(20), paddingLeft: scale(20)}]}>
+              <Text style={[styles.text, { textAlign: 'right', fontSize: scale(20), paddingBottom: 0}]}>من نحن</Text>
               <HTMLView stylesheet={styles} value={this.state.message} />
             </View>
-            <Image width={width} source={require('../../assets/contentBg.png')} style={{alignItems: 'flex-end', alignSelf:'flex-end', marginTop: 30}}>
-              <View style={{marginTop: 10, marginRight: 10}}>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>تدريب الجسم</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>20 دقيقة تجريب الدورة في الأسبوع</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>نتائج اللياقة البدنية آمنة وفعالة</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>خطة التغذية الصحية مصممة خصيصا لمتطلباتك</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>نتائج اللياقة البدنية آمنة وفعالة</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
-                <View style={styles.pathInnerWrapper}>
-                  <Text style={styles.pathText}>تدريب كامل مكثف للجسم</Text>
-                  <Ionicons name="ios-checkmark-circle-outline" size={scale(20)} color="#fff"/>
-                </View>
+            <ImageBackground resizeMode='stretch' source={require('../../assets/contentBg.png')} style={{alignItems: 'flex-end', alignSelf:'flex-end', marginBottom: 20, marginTop: 20, width: width*0.95}}>
+              <View style={{marginTop: scale(15), marginBottom: scale(15), marginRight: scale(15)}}>
+              {this.state.features.map(function(object, i){
+                return (
+                  <View key={i} style={[styles.pathInnerWrapper, styles.textBack]}>
+                  <Text style={styles.pathText}>{object.feature_name}</Text>
+                  <Ionicons name="ios-checkmark-circle-outline" size={scale(16)} color="#fff"/>
+                </View>);
+              })} 
               </View>
-             </Image>
+             </ImageBackground>
 
              <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 40}}>
               <TouchableHighlight onPress={() => this.props.navigation.navigate('Join')} style={styles.btn4}>
@@ -131,31 +113,33 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     backGround: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: '#212121',
         marginTop: Expo.Constants.statusBarHeight,
         paddingTop: Header.HEIGHT,
       },
     image: {
       flex: 1,
-      height: WINDOW_WIDTH * 0.41,
+      //height: WINDOW_WIDTH * 0.41,
     },
     pathText: {
       color: '#fff',
-      fontSize: scale(10),
+      fontSize: scale(12),
       fontFamily: 'NeoSansArabic',
-      marginRight: 5
+      marginRight: 15
     },
     pathInnerWrapper: {
       justifyContent: 'flex-end',
       flexDirection:'row',
-      marginBottom: 10,
+      paddingBottom: 15,
     },
     btnText: {
       fontFamily: 'NeoSansArabic',
       color: 'white',
       textAlign: 'center',
       padding: 8,
-      fontSize: scale(10)
+      fontSize: scale(14)
     },
     textBack: {
       backgroundColor: 'rgba(0,0,0,0)'
@@ -183,7 +167,7 @@ const styles = StyleSheet.create({
     },
     slide4: {
       flex: 1,
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       alignItems: 'center',
       paddingBottom: 50,
       width: null,
@@ -193,15 +177,15 @@ const styles = StyleSheet.create({
       color: '#fff',
       fontFamily: 'NeoSansArabic',
       textAlign: 'right',
-      padding: 15,
-      fontSize: scale(14),
+      //padding: 15,
+      fontSize: scale(12),
       lineHeight: scale(30)
     },
     text: {
       color: '#fff',
       fontFamily: 'NeoSansArabic',
       textAlign: 'center',
-      padding: 15,
+      //padding: 15,
       fontSize: scale(14),
       lineHeight: scale(30)
     },
