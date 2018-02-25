@@ -16,7 +16,7 @@ const verticalScale = size => height / guidelineBaseHeight * size;
 const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
 
 import { Header } from 'react-navigation';
-export default class contact extends React.Component {
+export default class join extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,11 +24,12 @@ export default class contact extends React.Component {
           name: '',
           email: '',
           phone: '',
-          message: ''
+          location: '',
+          details: ''
         }
       }
     static navigationOptions = ({ navigation }) => ({
-        title: 'تواصل معنا',
+        title: 'انضم إلينا',
         headerStyle:{ marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0 },
         headerTintColor: '#fff',
         headerTitleStyle: {fontFamily: 'NeoSansArabic',  fontWeight: 'normal', alignSelf:'center'},
@@ -43,26 +44,29 @@ export default class contact extends React.Component {
       });
     render() {
         return (
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <Image source={require('../../assets/back2-mdpi.png')} style={styles.backGround}>
+
+<TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <Image source={require('../../../assets/back2-mdpi.png')} style={styles.backGround}>
                 {/* <Text style={styles.title}>انضم الينا الان</Text> */}
             <KeyboardAvoidingView keyboardVerticalOffset={30} behavior='padding' style={styles.keyview}>
-            <ScrollView keyboardShouldPersistTaps='always' style={{padding:20}}>
+            <ScrollView  keyboardShouldPersistTaps='always' style={{flex:1, padding:20}}>
                 <Text style={styles.label}>الاسم بالكامل</Text>                    
-                <TextInput  ref='name' onSubmitEditing={(event) => {this.refs.email.focus()}} blurOnSubmit={ false } returnKeyType = {"next"} autoFocus = {true} onChangeText={(text) => this.setState({name: text})} placeholder='اسم العضو' style={styles.input} />
+                <TextInput ref='name' onSubmitEditing={(event) => {this.refs.email.focus()}} returnKeyType = {"next"} autoFocus = {true} onChangeText={(text) => this.setState({name: text})} placeholder='اسم العضو' style={styles.input} />
                 <Text style={styles.label}>البريد الالكتروني</Text>                    
-                <TextInput blurOnSubmit={ false } ref='email' keyboardType='email-address' onSubmitEditing={(event) => {this.refs.phone.focus()}} returnKeyType = {"next"} onChangeText={(text) => this.setState({email: text})} placeholder='البريد الالكتروني' style={styles.input} />
+                <TextInput ref='email' keyboardType='email-address' onSubmitEditing={(event) => {this.refs.phone.focus()}} returnKeyType = {"next"} onChangeText={(text) => this.setState({email: text})} placeholder='البريد الالكتروني' style={styles.input} />
                 <Text style={styles.label}>رقم الهاتف</Text>                    
-                <TextInput blurOnSubmit={ false } ref='phone' keyboardType='phone-pad' onSubmitEditing={(event) => {this.refs.message.focus()}} returnKeyType = {"next"} onChangeText={(text) => this.setState({phone: text})} placeholder='رقم الهاتف' style={styles.input} />
+                <TextInput ref='phone' keyboardType='phone-pad' onSubmitEditing={(event) => {this.refs.location.focus()}} returnKeyType = {"next"} onChangeText={(text) => this.setState({phone: text})} placeholder='رقم الهاتف' style={styles.input} />
+                <Text style={styles.label}>موقعك</Text>                    
+                <TextInput ref='location' onSubmitEditing={(event) => {this.refs.details.focus()}} returnKeyType = {"next"} onChangeText={(text) => this.setState({location: text})} placeholder='موقعك' style={styles.input} />
                 <Text style={styles.label}>الرسالة</Text>                    
-                <TextInput blurOnSubmit={ false } ref='message'
+                <TextInput ref='details'
                 returnKeyType = {"send"}
-                onChangeText={(text) => this.setState({message: text})}
-                placeholder='محتوى الرسالة' 
+                onChangeText={(text) => this.setState({details: text})}
+                placeholder='تفاصيل أخرى' 
                 style={styles.input} />
                 <TouchableOpacity style={styles.btn1} disabled={this.state.isLoading} onPress={()=>{
                     this.setState({isLoading: true})
-                    fetch('http://bodytec-iraq.com/api/contact-us-service', {
+                    fetch('http://bodytec-iraq.com/api/join-us-service', {
                         method: 'POST',
                         headers: {
                             Accept: "application/json",
@@ -72,7 +76,8 @@ export default class contact extends React.Component {
                             'name': this.state.name,
                             'email': this.state.email,
                             'phone': this.state.phone,
-                            'message': this.state.message,
+                            'location': this.state.location,
+                            'details': this.state.details,
                         })
                       })
                       .then((response) => response.json())
@@ -81,14 +86,14 @@ export default class contact extends React.Component {
                             this.refs.name.clear()
                             this.refs.email.clear()
                             this.refs.phone.clear()
-                            this.refs.message.clear()
+                            this.refs.location.clear()
+                            this.refs.details.clear()
                             Alert.alert('تم الإرسال','لقد تم ارسال رسالتك بنجاح سيتم الرد عليك فى أقرب وقت')
                         } else {
                             if(responseJson.error.errors) {
-                                Alert.alert('حقول مطلوبة', 'رجاء أكمل الحقول المطلوبة.')        
-                            } else {
-                                Alert.alert('حدث خطأ','رجاء أعد المحاولة')
+                                Alert.alert('حدث خطأ', error)        
                             }
+                            Alert.alert('حدث خطأ','رجاء أعد المحاولة')
                         }
                         this.setState({isLoading: false})
                       })
@@ -99,11 +104,12 @@ export default class contact extends React.Component {
                 }}>
                     <Text style={styles.btnText}>ارسل الرسالة</Text>
                 </TouchableOpacity>
-                    <ActivityIndicator style={{marginTop:15, opacity: this.state.isLoading ? 1.0 : 0.0}} />
+                    <ActivityIndicator style={{opacity: this.state.isLoading ? 1.0 : 0.0}} />
                 </ScrollView>
             </KeyboardAvoidingView>
             </Image>
             </TouchableWithoutFeedback>
+
         )
     }
 }
@@ -126,8 +132,7 @@ const styles = StyleSheet.create({
         //alignItems: 'center',
         //paddingVertical: 20,
         //marginRight: 30,
-        //marginLeft: 30,
-        //marginBottom:50
+        //marginLeft: 30
     },
     label: {
         fontSize: scale(12),

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text,RefreshControl,ActivityIndicator,ScrollView,KeyboardAvoidingView, ListView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Lightbox from 'react-native-lightbox';
+import { Text,RefreshControl,ActivityIndicator,ScrollView,KeyboardAvoidingView, ListView, TextInput, View, Image, StatusBar, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 import { Header } from 'react-navigation';
 
@@ -36,7 +36,7 @@ export default class join extends React.Component {
       });
 
     componentDidMount() {
-        return fetch('http://bodytec-iraq.com/api/get-galleries')
+        return fetch('http://bodytec-iraq.com/api/get-fitexpress-gallery')
         .then((response) => response.json())
         .then((responseJson) => {
           console.log(responseJson)
@@ -55,7 +55,7 @@ export default class join extends React.Component {
       }
       _onRefresh() {
         this.setState({refreshing: true});
-        fetch('http://bodytec-iraq.com/api/get-galleries')
+        fetch('http://bodytec-iraq.com/api/get-fitexpress-gallery')
         .then((response) => response.json())
         .then((responseJson) => {
             let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});

@@ -1,10 +1,12 @@
 import React from 'react';
 import { AppLoading, Asset, Font } from 'expo';
-import Home from './screens/home/home'
-import Join from './screens/join/join'
-import Gallery from './screens/gallery/gallery'
-import Contact from './screens/contact/contact'
-import About from './screens/about/about'
+import Home from './screens/fitexpress/home/home'
+import Join from './screens/fitexpress/join/join'
+import Gallery from './screens/fitexpress/gallery/gallery'
+import Contact from './screens/fitexpress/contact/contact'
+import About from './screens/fitexpress/about/about'
+import Bodytec from './screens/bodytec/home/home'
+import BodytecGallery from './screens/bodytec/gallery/gallery'
 
 import { StyleSheet, Text, View, Image, StatusBar, ImageBackground, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
@@ -25,7 +27,13 @@ const Stack = {
   },
   About: {
 		screen: About
-	},
+  },
+  Bodytec: {
+    screen: Bodytec
+  },
+  BodytecGallery: {
+    screen: BodytecGallery
+  },
 };
 
 const DrawerRoutes = {
@@ -46,15 +54,17 @@ const DrawerRoutes = {
   },
 };
 
+
+
 const RootNavigator = StackNavigator({
 		Drawer: {
 			name: 'Drawer',
 			screen: DrawerNavigator(DrawerRoutes,{
-          contentComponent: CustomDrawer,
-          drawerPosition: 'right'
-        }
+        contentComponent: CustomDrawer,
+        drawerPosition: 'right'
+      }
 			),
-		},
+    },
 		...Stack
 	},
 		{
@@ -80,6 +90,7 @@ function cacheFonts(fonts) {
 export default class App extends React.Component {
   state = {
     isReady: false,
+    current: "fit"
   };
 
   async _loadAssetsAsync() {
@@ -114,7 +125,12 @@ export default class App extends React.Component {
       );
     }
     return (
-      <RootNavigator ref={nav => { this.navigator = nav; }} />
+      <RootNavigator
+      onNavigationStateChange={(prevState, currentState) => {
+        const currentScreen = getCurrentRouteName(currentState);
+        const prevScreen = getCurrentRouteName(prevState);
+      }}
+      ref={nav => { this.navigator = nav; }} />
     );
   }
 }

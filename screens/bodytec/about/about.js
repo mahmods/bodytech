@@ -76,12 +76,12 @@ export default class about extends React.Component {
           }
         return (
             <View style={styles.backGround}>
-          <Image source={require('../../assets/back2-mdpi.png')} style={styles.slide4}>
+          <Image source={require('../../../assets/back2-mdpi.png')} style={styles.slide4}>
             <View style={[styles.textBack, {paddingRight: scale(20), paddingLeft: scale(20)}]}>
               <Text style={[styles.text, { textAlign: 'right', fontSize: scale(20), paddingBottom: 0}]}>من نحن</Text>
               <HTMLView stylesheet={styles} value={this.state.message} />
             </View>
-            <ImageBackground resizeMode='stretch' source={require('../../assets/contentBg.png')} style={{alignItems: 'flex-end', alignSelf:'flex-end', marginBottom: 20, marginTop: 20, width: width*0.95}}>
+            <ImageBackground resizeMode='stretch' source={require('../../../assets/contentBg.png')} style={{alignItems: 'flex-end', alignSelf:'flex-end', marginBottom: 20, marginTop: 20, width: width*0.95}}>
               <View style={{marginTop: scale(15), marginBottom: scale(15), marginRight: scale(15)}}>
               {this.state.features.map(function(object, i){
                 return (

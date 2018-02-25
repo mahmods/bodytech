@@ -46,7 +46,7 @@ export default class join extends React.Component {
         return (
 
 <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <Image source={require('../../assets/back2-mdpi.png')} style={styles.backGround}>
+            <Image source={require('../../../assets/back2-mdpi.png')} style={styles.backGround}>
                 {/* <Text style={styles.title}>انضم الينا الان</Text> */}
             <KeyboardAvoidingView keyboardVerticalOffset={30} behavior='padding' style={styles.keyview}>
             <ScrollView  keyboardShouldPersistTaps='always' style={{flex:1, padding:20}}>
