@@ -1,75 +1,125 @@
 import React from 'react';
 import { AppLoading, Asset, Font } from 'expo';
-import Home from './screens/fitexpress/home/home'
+import FitexpressHome from './screens/fitexpress/home/home'
+import FitexpressGallery from './screens/fitexpress/gallery/gallery'
+
 import Join from './screens/fitexpress/join/join'
-import Gallery from './screens/fitexpress/gallery/gallery'
 import Contact from './screens/fitexpress/contact/contact'
 import About from './screens/fitexpress/about/about'
-import Bodytec from './screens/bodytec/home/home'
+
+import BodytecHome from './screens/bodytec/home/home'
 import BodytecGallery from './screens/bodytec/gallery/gallery'
 
 import { StyleSheet, Text, View, Image, StatusBar, ImageBackground, TouchableHighlight, Dimensions, Platform, PixelRatio } from 'react-native';
 import { DrawerNavigator, StackNavigator } from 'react-navigation';
-import CustomDrawer from './CustomDrawer'
 
-const Stack = {
-	Home: {
-		screen: Home
+import CustomDrawerBodytec from './CustomDrawerBodytec'
+import CustomDrawerFitexpress from './CustomDrawerFitexpress'
+
+const StackFitexpress = {
+	FitexpressHome: {
+		screen: FitexpressHome
 	},
 	Join: {
 		screen: Join
   },
-  Gallery: {
-		screen: Gallery
+  FitexpressGallery: {
+		screen: FitexpressGallery
   },
   Contact: {
 		screen: Contact
   },
   About: {
 		screen: About
-  },
-  Bodytec: {
-    screen: Bodytec
-  },
-  BodytecGallery: {
-    screen: BodytecGallery
-  },
+  }
 };
 
-const DrawerRoutes = {
+const StackBodytec = {
+	BodytecHome: {
+		screen: BodytecHome
+	},
+	Join: {
+		screen: Join
+  },
+  BodytecGallery: {
+		screen: BodytecGallery
+  },
+  Contact: {
+		screen: Contact
+  },
+  About: {
+		screen: About
+  }
+};
+
+const DrawerRoutesFitexpress = {
 	HomeStack: {
-		screen: StackNavigator(Stack, { initialRouteName: 'Home', })
+		screen: StackNavigator(StackFitexpress, { initialRouteName: 'FitexpressHome', })
 	},
   galleryStack: {
-    screen: StackNavigator(Stack, { initialRouteName: 'Gallery' })
+    screen: StackNavigator(StackFitexpress, { initialRouteName: 'FitexpressGallery' })
   },
 	joinStack: {
-		screen: StackNavigator(Stack, { initialRouteName: 'Join' })
+		screen: StackNavigator(StackFitexpress, { initialRouteName: 'Join' })
   },
   contactStack: {
-		screen: StackNavigator(Stack, { initialRouteName: 'Contact' })
+		screen: StackNavigator(StackFitexpress, { initialRouteName: 'Contact' })
   },
   aboutStack: {
-		screen: StackNavigator(Stack, { initialRouteName: 'About' })
+		screen: StackNavigator(StackFitexpress, { initialRouteName: 'About' })
+  }
+};
+
+const DrawerRoutesBodytec = {
+	HomeStack: {
+		screen: StackNavigator(StackBodytec, { initialRouteName: 'BodytecHome', })
+	},
+  galleryStack: {
+    screen: StackNavigator(StackBodytec, { initialRouteName: 'BodytecGallery' })
   },
+	joinStack: {
+		screen: StackNavigator(StackBodytec, { initialRouteName: 'Join' })
+  },
+  contactStack: {
+		screen: StackNavigator(StackBodytec, { initialRouteName: 'Contact' })
+  },
+  aboutStack: {
+		screen: StackNavigator(StackBodytec, { initialRouteName: 'About' })
+  }
 };
 
 
 
 const RootNavigator = StackNavigator({
-		Drawer: {
-			name: 'Drawer',
-			screen: DrawerNavigator(DrawerRoutes,{
-        contentComponent: CustomDrawer,
-        drawerPosition: 'right'
-      }
-			),
-    },
-		...Stack
-	},
+  fitexpress: {
+    screen: StackNavigator({
+      Drawer: {
+        name: 'Drawer',
+        screen: DrawerNavigator(DrawerRoutesFitexpress,{
+          contentComponent: CustomDrawerFitexpress,
+          drawerPosition: 'right'
+        }
+        ),
+      },
+      ...StackFitexpress
+    },{headerMode: 'none'})
+  },
+  Bodytec: {
+    screen: StackNavigator({
+      Drawer: {
+        name: 'Drawer',
+        screen: DrawerNavigator(DrawerRoutesBodytec,{
+          contentComponent: CustomDrawerBodytec,
+          drawerPosition: 'right'
+        }
+        ),
+      },
+      ...StackBodytec
+    },{headerMode: 'none'})
+  }
+},
 		{
       headerMode: 'none',
-      
 		}
 	);
 
@@ -126,10 +176,6 @@ export default class App extends React.Component {
     }
     return (
       <RootNavigator
-      onNavigationStateChange={(prevState, currentState) => {
-        const currentScreen = getCurrentRouteName(currentState);
-        const prevScreen = getCurrentRouteName(prevState);
-      }}
       ref={nav => { this.navigator = nav; }} />
     );
   }

@@ -5,6 +5,9 @@ import { style } from 'expo/src/Font';
 
 export default CustomDrawer = (props) => (
   <ScrollView style={styles.scrollView}>
+  <View style={styles.logoWrapper}>
+    <Image source={require('./assets/fitlogo.png')} style={styles.logo}/>
+  </View>
     <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
       <DrawerItems {...props} 
       labelStyle = {styles.label}

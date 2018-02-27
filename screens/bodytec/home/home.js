@@ -24,7 +24,11 @@ export default class Home extends React.Component {
         headerRight: (
           <TouchableOpacity><Foundation name="list" style={{padding: 20}} size={28} color="#fff"
           onPress={()=>{ navigation.navigate('DrawerOpen') }} /></TouchableOpacity>
-        )
+        ),
+        headerLeft: (
+          <Ionicons name="md-arrow-round-back" style={{padding: 20}} size={28} color="#fff"
+          onPress={()=>{ navigation.goBack(null) }} />
+        ),
       });
     render() {
       return (

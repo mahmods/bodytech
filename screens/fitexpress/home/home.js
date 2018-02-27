@@ -15,6 +15,9 @@ const verticalScale = size => height / guidelineBaseHeight * size;
 const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
 
 export default class Home extends React.Component {
+  componentDidMount() {
+    this.props.navigation.setParams({ name: 'Lucy' })
+  }
     static navigationOptions = ({ navigation }) => ({
         title: 'الرئيسية',
         //headerStyle: {marginTop: (Platform.OS === 'ios') ? 0 : Expo.Constants.statusBarHeight, backgroundColor: 'transparent',},//,position: 'absolute', backgroundColor: 'transparent', zIndex: 100, top: 0, left: 0, right: 0},
@@ -27,6 +30,7 @@ export default class Home extends React.Component {
         )
       });
     render() {
+      
       return (
             <Image source={require('../../../assets/slide-01.png')} style={[styles.slide1]}>
             <Image source={require('../../../assets/fitlogo.png')} style={[styles.logo, {width: scale(250)}]} resizeMode="contain"/>

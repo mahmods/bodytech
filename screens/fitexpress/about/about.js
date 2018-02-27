@@ -65,6 +65,7 @@ export default class about extends React.Component {
           .catch((error) => {
 
           });
+          
       }
     render() {
         if (this.state.isLoading) {
@@ -77,6 +78,7 @@ export default class about extends React.Component {
         return (
             <View style={styles.backGround}>
           <Image source={require('../../../assets/back2-mdpi.png')} style={styles.slide4}>
+          <Text>{this.state.name}</Text>
             <View style={[styles.textBack, {paddingRight: scale(20), paddingLeft: scale(20)}]}>
               <Text style={[styles.text, { textAlign: 'right', fontSize: scale(20), paddingBottom: 0}]}>من نحن</Text>
               <HTMLView stylesheet={styles} value={this.state.message} />
